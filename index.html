@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="sub" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id ="addQty" type="text" class="form-control text-center" value="1">
-                           <button id="add" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id ="subA"class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id ="Qty1" type="text" class="form-control text-center" value="1">
+                           <button id="addA" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id ="currentA">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="sub" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button id="add" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="subB"class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id = "Qty2"type="text" class="form-control text-center" value="1">
+                           <button id="addB" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="currentB">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="total">1278</span></h5>
                      </div>
                   </div>
                </div>
@@ -80,17 +80,120 @@
 
 
    <script>
-      let addBtn = document.querySelector('#add');
-      let subBtn = document.querySelector('#sub');
-      let input = document.querySelector('input');
-      addBtn.addEventListener('click', () =>{
-         input.value =parseInt(input.value);
-         input.value++;
+      //addA
+      const addA = document.getElementById("addA");
+      addA.addEventListener("click", function(){
+         const qty = document.getElementById("Qty1").value;
+         add("Qty1",qty);
+
+         const currentA = document.getElementById("currentA").innerText;
+         const amountA= Number(currentA);
+         
+            const totalA = amountA + 1219;
+         document.getElementById("currentA").innerText = totalA;
+         //subtotal
+         
+         updateSubTotalAddA("subtotal");
+         updateSubTotalAddA("total");
+         
       })
-      subBtn.addEventListener('click', () =>{
-         input.value =parseInt(input.value);
-         input.value --;
+      function updateSubTotalAddA(id){
+         const subtotal = document.getElementById(id).innerText;
+         const subBl = Number(subtotal);
+         const sub = subBl + 1219;
+         document.getElementById(id).innerText = sub;
+      }
+
+      //addB
+      const addB = document.getElementById("addB");
+      addB.addEventListener("click", function(){
+         const qty= document.getElementById("Qty2").value;
+         add("Qty2", qty); 
+         const currentB = document.getElementById("currentB").innerText;
+         const amountB= Number(currentB);
+         
+            const totalB = amountB + 59;
+         document.getElementById("currentB").innerText = totalB;
+         //subtotal
+         updateSubTotalAddB("subtotal");
+         updateSubTotalAddB("total");
+         
       })
+      function updateSubTotalAddB(id){
+         const subtotal = document.getElementById(id).innerText;
+         const subBl = Number(subtotal);
+         const sub = subBl + 59
+         document.getElementById(id).innerText = sub;
+
+      }
+      function add(id, qty){
+         const qtyNo = Number(qty);
+         const totalQty = qtyNo + 1;
+         document.getElementById(id).value = totalQty ;
+        }
+      
+
+      
+      //subtractA
+      const subA = document.getElementById("subA");
+      subA.addEventListener("click", function(){
+         const qty = document.getElementById("Qty1").value;
+         sub("Qty1", qty);
+         const currentA = document.getElementById("currentA").innerText;
+         const amountA= Number(currentA);
+         if(amountA>1219){
+         const totalA = amountA - 1219;
+         document.getElementById("currentA").innerText = totalA;
+         }
+         //subtotal
+         updateSubTotal1278("subtotal");
+         updateSubTotal1278("total");
+         
+      })
+      function updateSubTotal1278(id){
+         const subtotal = document.getElementById(id).innerText;
+         const subTA = Number(subtotal);
+         if(subTA > 1278){
+            const subT = subTA - 1219;
+         document.getElementById(id).innerText = subT ;
+         }
+      }
+
+      //subB
+      const subB = document.getElementById("subB");
+      subB.addEventListener("click", function(){
+         const qty = document.getElementById("Qty2").value;
+         sub("Qty2", qty);
+         const currentB = document.getElementById("currentB").innerText;
+         const amountB= Number(currentB);
+         if(amountB> 59){
+         const totalB = amountB - 59;
+         document.getElementById("currentB").innerText = totalB;
+         }
+
+         //subtotal
+         updateSubTotal59("subtotal");
+         updateSubTotal59("total");
+         
+      })
+
+      function updateSubTotal59(id){
+         const subtotalA = document.getElementById(id).innerText;
+         const subTA = Number(subtotalA);
+         if(subTA>1278){
+            const subT = subTA - 59;
+         document.getElementById(id).innerText = subT ;
+         }
+      }
+
+      //function for subtract
+       function sub(id, qty){
+         const qtyNo = Number(qty);
+         if(qtyNo > 1){
+            const totalQty = qtyNo -1;
+            document.getElementById(id).value = totalQty;
+         }
+       }
       
       
    </script>
